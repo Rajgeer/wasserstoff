@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/UserModel');
 const config = require('../config');
-module.exports = class UserController {
+class UserController {
     static async SignUp(req, res){
-        console.log({method:req.method, body:req.body});
+        // console.log({method:req.method, body:req.body});
         try {
             const user = await UserModel.findOne({ email:req.body?.email });
             if(user) return res.status(400).json({ message: "User already exists" });
@@ -43,3 +43,4 @@ module.exports = class UserController {
         }
     }
 }
+module.exports= UserController;

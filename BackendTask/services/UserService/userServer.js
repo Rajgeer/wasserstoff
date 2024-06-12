@@ -1,21 +1,27 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
+const router = require('./routes');
 const config = require('./config');
 const app = express();
 const PORT= 4001;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/users',routes);
 
+
+
+app.use(bodyParser.json());
+
+app.use('/users',router);
+// app.post('/signup', (req, res) =>{
+//     console.log({body: req.body});
+//     res.send('Success');
+// })
 // Basic 404 handler
-// app.use((req, res) => {
-//     res.status(404).send({
-//       message: 'The requested URL could not be found.',
-//       statusCode: 404,
-//     });
-// });
+app.use((req, res) => {
+    res.status(404).send({
+      message: 'The requested URL could not be found.',
+      statusCode: 404,
+    });
+});
 
 mongoose.connect(config.MONGO_URI, {
     bufferCommands: true,
@@ -25,12 +31,14 @@ mongoose.connect(config.MONGO_URI, {
 })
 .then(()=>{
     console.log("Mongodb is Connected")
-    app.listen(PORT, ()=>{
-        console.log(`UserService is running on port ${PORT}`);
-    })
+   
 })
 .catch((error)=> {
     console.error(`MongoDB connection error: ${error}`);
+});
+
+app.listen(PORT, ()=>{
+    console.log(`UserService is running on port ${PORT}`);
 })
 
 
