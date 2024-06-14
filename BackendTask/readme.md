@@ -29,12 +29,12 @@
     Nginx can cache static files, which can improve the performance of Node.js applications.
 # Overall, Nginx is a powerful and versatile web server that can be used to improve the performance, stability, and scalability of Node.js applications.
 
-worker_processes auto;
-pid /var/run/nginx.pid;
-events {
-    worker_connections  1024;  # or any number appropriate for your setup
-}
-http {
+  worker_processes auto;
+  pid /var/run/nginx.pid;
+  events {
+      worker_connections  1024;  # or any number appropriate for your setup
+  }
+  http {
       upstream backend_task {
           server localhost:4000;
           server 127.0.0.1:4000;
@@ -87,4 +87,4 @@ http {
           #     proxy_pass http://comment_service;
           # }
       }
-}
+    }
