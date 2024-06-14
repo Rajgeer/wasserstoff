@@ -2,14 +2,16 @@
 const axios = require('axios');
 const config = require('../config');
 
-const postapi = config.endpoints.find(endpoint => endpoint.name === 'posts');
-
 exports.handleRequest = async (req, res) => {
+    const pathName = req.path?.split('/')[1];
     try {
+        const postapis = config.endpoints.find(endpoint => endpoint.name === pathName);
         const response = await axios({
             method: req.method,
-            url: `${targetService.url}${req.originalUrl}`,
-            data: req.body
+            url: `${postapis.url}${req.path}`,
+            data: req.body,
+            header:req.header,
+            query:req.query
         });
         res.status(response.status).json(response.data);
     } catch (error) {
@@ -18,10 +20,4 @@ exports.handleRequest = async (req, res) => {
             message: error.message
         });
     }
-    // try {
-    //     const response = await axios.get(`${postapi.url}${req.path}`);
-    //     res.send(response.data);
-    // } catch (error) {
-    //     res.status(500).send('Error routing to postapi');
-    // }
 };

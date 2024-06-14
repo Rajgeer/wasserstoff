@@ -22,7 +22,9 @@ app.use((req, res) => {
       statusCode: 404,
     });
 });
-
+app.get('/', (req, res) => {
+    res.send("Hello world");
+})
 mongoose.connect(config.MONGO_URI, {
     bufferCommands: true,
     dbName:"UserService",
@@ -31,15 +33,14 @@ mongoose.connect(config.MONGO_URI, {
 })
 .then(()=>{
     console.log("Mongodb is Connected")
-   
 })
 .catch((error)=> {
     console.error(`MongoDB connection error: ${error}`);
 });
-
 app.listen(PORT, ()=>{
     console.log(`UserService is running on port ${PORT}`);
 })
+
 
 
 
