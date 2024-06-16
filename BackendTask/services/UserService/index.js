@@ -2,19 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const router = require('./routes');
-const config = require('./config');
+const config = require('../config');
 const app = express();
 const PORT= 4001;
-
-
 
 app.use(bodyParser.json());
 
 app.use('/users',router);
-// app.post('/signup', (req, res) =>{
-//     console.log({body: req.body});
-//     res.send('Success');
-// })
 // Basic 404 handler
 app.use((req, res) => {
     res.status(404).send({

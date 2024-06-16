@@ -1,0 +1,32 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "services/UserService/index.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "services/PostService/index.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "BackendTask/index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/UserService",
+        "dest": "/services/UserService/index.js"
+      },
+      {
+        "src": "/PostService",
+        "dest": "/services/PostService/index.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/BackendTask/index.js"
+      }
+    ]
+}
+  

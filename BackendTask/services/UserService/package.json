@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon userServer.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

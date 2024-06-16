@@ -3,7 +3,6 @@ const UserModel = require('../models/UserModel');
 const config = require('../config');
 class UserController {
     static async signUp(req, res){
-        // console.log({method:req.method, body:req.body});
         try {
             const user = await UserModel.findOne({ email:req.body?.email });
             if(user) return res.status(400).json({ message: "User already exists" });
@@ -16,9 +15,7 @@ class UserController {
     };
     static async signIn(req, res){
         try {
-            console.log({Request : req});
             const {email, password} = req.body;
-            console.log({body: req.body, method: req.method});
             const user = await UserModel.findOne({ email });
             if(!user){
                 res.status(400)
