@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/UserModel');
-const config = require('../config');
+// const config = require('../config');
 class UserController {
     static async signUp(req, res){
         try {
             const user = await UserModel.findOne({ email:req.body?.email });
             if(user) return res.status(400).json({ message: "User already exists" });
             const newUser= await UserModel.create(req.body);
-            const token =jwt.sign({id: newUser.id }, config.SECRET_KEY, { expiresIn: "2h" });
+            const token =jwt.sign({id: newUser.id }, process.env.SECRET_KEY, { expiresIn: "2h" });
             res.status(201).json({id: newUser.id, email:newUser.email, fullName:newUser.fullName, token});
         } catch (error) {
             res.status(500).json({ error, message: "Server error" });  
@@ -26,7 +26,7 @@ class UserController {
                     res.status(400)
                     .json({ values: null, success: false, message: "Wrong crendetials" });
                 }
-                const token =jwt.sign({id: user._id }, config.SECRET_KEY, { expiresIn: "2h" });
+                const token =jwt.sign({id: user._id }, process.env.SECRET_KEY, { expiresIn: "2h" });
                 res.status(201).json({id: user._id, email:user.email, fullName:user.fullName, token});
             }
         } catch (error) {

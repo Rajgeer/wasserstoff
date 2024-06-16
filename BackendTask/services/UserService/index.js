@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const router = require('./src/routes');
-const config = require('./src/config');
+// const config = require('./src/config');
+require('dotenv');
 const app = express();
 const PORT= 4001;
 
@@ -19,7 +20,7 @@ app.use((req, res) => {
 app.get('/', (req, res) => {
     res.send("Hello world");
 })
-mongoose.connect(config.MONGO_URI, {
+mongoose.connect(!process.env.MONGO_URI, {
     bufferCommands: true,
     dbName:"UserService",
     autoIndex: true,

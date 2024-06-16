@@ -1,4 +1,4 @@
-const config = require("../config");
+// const config = require("../config");
 const jwt = require("jsonwebtoken");
 exports.verifyToken = (req, res, next) => {
   const userId = req?.query?.userId;
@@ -12,7 +12,7 @@ exports.verifyToken = (req, res, next) => {
         return res.status(401).json({ message: "Unauthorized" });
       }
       try {
-        const decoded = jwt.verify(token, config.SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
         if (!(userId === decoded.id)) {
           return res
             .status(401)
