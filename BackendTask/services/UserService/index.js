@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const router = require('./routes');
-const config = require('../config');
+const router = require('./src/routes');
+const config = require('./src/config');
 const app = express();
 const PORT= 4001;
 

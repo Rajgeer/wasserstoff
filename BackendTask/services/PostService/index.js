@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const config = require("./config");
+const config = require("./src/config");
 const PostModel = require('./src/models/PostModel');
-const {verifyToken} = require('./middleware');
+const {verifyToken} = require('./src/middleware');
 const app = express();
 const PORT = 4002;
 
